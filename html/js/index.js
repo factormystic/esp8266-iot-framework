@@ -9,6 +9,10 @@ import { ConfigPage } from './comp/ConfigPage'
 import { FilePage } from './comp/FilePage'
 import { FirmwarePage } from './comp/FirmwarePage'
 
+import Config from './configuration.json';
+
+const header_config = Config && Config.length && Config.filter(opt => opt.name === "projectName").map(opt => opt.value)[0];
+
 if (process.env.NODE_ENV === 'production')
     var url = window.location.origin;
 else
@@ -23,7 +27,9 @@ function Root() {
     <BrowserRouter>
 
         <Header>
-            <h1><Box style={{verticalAlign:"-0.1em"}} /> ESP8266</h1>
+            <h1>
+                <Box style={{ verticalAlign: "-0.1em" }} /> {header_config}
+            </h1>
 
             <Hamburger onClick={() => setMenu(!menu)} />
             <Menu className={menu ? "" : "menuHidden"}>
